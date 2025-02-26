@@ -1,0 +1,294 @@
+\chapter{Electrostatics}
+\section{The Electric Field}
+The foundational problem of electrostatics is as follows. Suppose we have some electric charges $q_1, q_2, q_3, \dots$ (\textbf{source charges}); what force do they exert on another charge $Q$ (\textbf{test charge})? The positions of the source charges are given (as functions of time) and we must calculate the position of the test charge.
+
+This problem is only solvable due to the principle of superposition. Suppose that each source charge exerts a force $\mbf F_1, \mbf F_2, \mbf F_3, \dots$ on the test charge. Then, the net force from the source charges on the test charge is given by $\mbf F_1 + \mbf F_2 + \mbf F_3 + \cdots$.
+\subsection*{Coulomb's Law}
+Coulomb's Law dictates the force between a test charge $Q$ and a single point charge $q$.
+\begin{equation}
+    \boxed{\mbf F = \K \frac{qQ}{\sr^2}\hsr} 
+\end{equation}
+Where $\bsr$ is the vector pointing from the position $\mbf r'$ of the source charge to the position $\mbf r$ of the test charge.
+\[ \bsr = \mbf r - \mbf r'\]
+\subsection*{Electric Field}
+If we have several point source charges $q_1, q_2, \dots, q_n$ at distances $\sr_1, \sr_2, \dots, \sr_n$ from a test charge $Q$, the total force on $Q$ is 
+\begin{align*}
+    \mbf F &= \sum_{i\le n}\K \frac{q_iQ}{\sr_i^2} = Q \sum_{i\le n}\frac{q_i}{\sr_i^2}\hsr_i
+\end{align*}
+We define the quantity under the sum as the \textbf{electric field} $\mbf E$:
+\begin{equation}
+    \boxed{\mbf E(\mbf r) \equiv  \K \sum_{i=1}^n \frac{q_i}{\sr_i^2}\hsr_i}
+\end{equation}
+this yields
+\begin{equation}
+    \mbf F = Q\mbf E
+\end{equation}
+Notice that the electric field only depends on the position $\mbf r$, not the test charge $Q$. Physically, we consider the electric field to be the ``force per unit charge" at a given point.
+\subsection*{Continuous Charge Distributions}
+In the case of a continuous charge distribution, the electric field becomes the integral
+\[ \mbf E(\mbf r) = \K \int \frac{\hsr}{\sr^2}\dd q \]
+If this region is a line, we will have some charge per length $\lambda(\mbf r') \equiv \dd q/\dd \ell'$ where $d\ell'$ is an infinitesimal arc-length along the line and the derivative is evaluated at $\mbf r'$. 
+
+This yields $\lambda(\mbf r') \dd \ell' = \dd q$, so the integral of the electric field becomes
+\begin{equation}
+    \mbf E(\mbf r) = \K \int\limits_C \frac{\lambda(\mbf r')\hsr}{\sr^2}\dd \ell'
+\end{equation}
+Similar considerations for a surface charge or a volume charge give us comparable formulas:
+\begin{equation}
+    \mbf E(\mbf r) = \K \iint\limits_A \frac{\sigma(\mbf r')\hsr}{\sr^2}\dd a'
+\end{equation}
+and
+\begin{equation}
+    \mbf E(\mbf r) = \K\iiint\limits_V \frac{\rho(\mbf r')\hsr}{\sr^2}\dd \tau'
+\end{equation}
+Note that in these equations, $\bsr$ is the vector pointing from the source point $\mbf r'$ (the one being integrated over) to the field point $\mbf r$.
+\begin{example}
+    Find the electric field a distance $z$ above the midpoint of a uniform line of charge with length $2L$ and linear charge density $\lambda$.
+
+    \textit{Solution.} First, let's write out every variable of interest.
+    \[ \mbf r = z\zhat \quad \mbf r' = x\xhat \quad \dd \ell' = \dd x\]
+    \[ \bsr = z\zhat - x\xhat \quad \sr = \sqrt{x^2+z^2} \quad \hsr = \frac{z\zhat - x\xhat}{\sqrt{x^2+z^2}} \]
+    Then, apply the formula for the electric field of a line charge:
+    \begin{align*}
+        \mbf E  &= \K\int\limits_C \frac{\hsr}{\sr^2} \dd \ell' \\
+        &= \lambda\K\int_{-L}^L \frac{z\zhat - x\xhat }{(x^2+z^2)^{3/2}}\dd x \\
+        &= \lambda\K\int_{-L}^L \frac{z}{(x^2+z^2)^{3/2}}\dd x \zhat + \lambda\K\int_{-L}^L \frac{x}{(x^2+z^2)^{3/2}}\dd x\xhat 
+    \end{align*}
+    The right integral is an odd function of $x$ being integrated over a symmetric region, so it goes to zero. The right integral is a bit tricky to evaluate, so we will use a table of integrals to say 
+    \[ \int_{-L}^L \frac{1}{(x^2+z^2)^{3/2}}\dd x = \frac{x}{z\sqrt{z^2+x^2}}\biggr|_{-L}^L\]
+    This then yields
+    \[ \boxed{\mbf E = \K\frac{2\lambda L}{z\sqrt{z^2+L^2}}\zhat } \]
+    We can also see that in the limiting case $z\gg L$,
+    \[ \mbf E \approx \K \frac{q}{z^2} \]
+    where $q = 2\lambda L$ is the total charge on the rod. Note that this is just the result for a single point charge, which checks out with our intuition; as we get further and further away, the rod appears increasingly small until it can essentially be treated as a point charge.
+
+    There is also the limiting case $L\to\infty$, which gives $L/\sqrt{z^2+L^2} \to 1$, so
+    \[ \mbf E = \K \frac{2\lambda}{z} \]
+    This is the electric field for an infinite straight wire.
+\end{example}
+\section{Divergence and Curl of Electric Fields}
+\subsection{Field Lines, Flux, and Gauss' Law}
+We define the flux of a field through some surface $\mathcal S$ as
+\begin{equation}
+    \boxed{\Phi_E \equiv \oiint_\mathcal{S} \mbf E \cdot \dd \mbf a}
+\end{equation}
+this can be understood as a measure of the number of ``field lines" passing through the surface.
+
+For the case of a point charge $q$ at the origin, the flux of $\mbf E$ through a spherical surface of radius $r$ is 
+\begin{align*}
+    \Phi_E = \oiint_\mathcal{S} \mbf E \cdot \dd \mbf a &= \K\oint_\mathcal{S}\frac{q }{r^2}\rhat \cdot \dd \mbf a \\
+    &= \K \int_0^{2\pi} \int_0^{\pi} \frac{q}{r^2}\rhat \cdot (r^2\sin\theta \dd \theta \dd \phi \rhat ) \\
+    &= \K \cdot 2\pi \cdot 2 \cdot q = \frac{q}{\epsilon_0}
+\end{align*}
+In fact, this result turns out to be identical for \textit{any} surface enclosing the charge. 
+
+If there are multiple charges $q_1, q_2, \dots, q_n$ enclosed within the surface, notice that by the principle of superposition, the net electric field $\mbf E = \mbf E_1 + \mbf E_2 + \cdots + \mbf E_n$ where each $\mbf E_i$ is the field from $q_i$. Then,
+\begin{align*}
+    \Phi_E &= \oiint_\mathcal{S} \mbf E \cdot \dd \mbf a \\
+    &= \oiint_\mathcal{S} (\mbf E_1 + \mbf E_2 + \cdots + \mbf E_n) \cdot \dd \mbf a \\
+    &= \oiint_\mathcal{S} \mbf E_1\cdot \dd \mbf a + \oiint_\mathcal{S} \mbf E_2 \cdot \dd \mbf a + \cdots + \oiint_\mathcal{S} \mbf E_n \cdot \dd \mbf a 
+\end{align*}
+Applying Gauss' law for a single particle to each of these fields yields
+\[ \Phi_E = \frac{q_1 + q_2 + \cdots + q_n}{\epsilon_0} \]
+So the flux through any closed surface containing a net charge $Q_\text{enc} = q_1 + q_2 + \cdots + q_n$ is given by
+\begin{equation} \label{gauss' law}
+    \oiint_\mathcal{S} \mbf E \cdot \dd \mbf a = \frac{Q_\text{enc}}{\epsilon_0}
+\end{equation}
+We may also rephrase this equation as a differential one by applying the divergence theorem. Since $\mathcal S$ is a closed surface, it must enclose some volume $\mathcal V$. Recall the statement of the divergence theorem:
+\[ \iiint_\Omega \div \mbf F \dd \tau = \oiint_{\partial\Omega} \mbf F \cdot \dd \mbf a\]
+Applying this to (\ref{gauss' law}) enables us to obtain
+\[ \iiint_{\mathcal V} \div \mbf E \dd \tau = \frac{Q_\text{enc}}{\epsilon_0} \]
+We may additionally write the enclosed charge in terms of the charge density $\rho$ within $\mathcal V$ as
+\[ Q_\text{enc} = \iiint_\mathcal{V} \rho \dd \tau\]
+\[ \implies \iiint_\mathcal{V} \div\mbf E \dd \tau = \iiint_\mathcal{V} \frac{\rho}{\epsilon_0}\dd \tau\]
+Since this holds for \textit{any} arbitrary volume $\mathcal V$, we must have
+\begin{equation} \label{gauss' law, differential}
+    \div \mbf E = \frac{\rho}{\epsilon_0}
+\end{equation}
+\begin{example}
+    Suppose the electric field within some region is found to be $kr^3\rhat$ in spherical coordinates, where $k$ is a constant with appropriate units. Find the charge density $\rho$ within the region and find the total charge contained within a sphere of radius $R$ centered at the origin.
+
+    \textit{Solution.} First, recall the formula for the divergence of a function $\mbf F = F_r\rhat + F_\phi \bsm{\hat \phi} + F_\theta \bsm{\hat\theta}$ in spherical coordinates:
+    \[ \div \mbf F = \frac{1}{r^2}\pdv{r} (r^2F_r) + \frac{1}{r\sin\theta}\pdv{\theta}(\sin\theta F_\theta) + \frac{1}{r\sin\theta} \pdv{F_\phi}{\phi}\]
+    This gives
+    \begin{align*}
+        \div \mbf E = \frac{1}{r^2} \pdv{r} (r^2 \cdot kr^3) = 5kr^2
+    \end{align*}
+    So we have $\rho = 5kr^2\epsilon_0$. We could have also expanded this function and taken the cartesian divergence of $k(x^2+y^2+z^2)(x\xhat + y\yhat + z\zhat)$ to find the same result.
+
+    To find the total charge contained in the sphere, apply Gauss' law in its integral form. Notice that
+    \[ \oiint_\mathcal{S} \mbf E \cdot \dd \mbf a = \frac{Q_\text{enc}}{\epsilon_0}\]
+    But since the magnitude of the given electric field is rotationally invariant, we say its magnitude is constant at $E = kR^3$ along the surface of the sphere. Additionally the electric field is parallel to $\dd \mbf a$, so Gauss' law simply becomes
+    \[ E\oiint_\mathcal{S}\dd a = \frac{Q_\text{enc}}{\epsilon_0} \]
+    $\oiint_\mathcal{S} \dd a$ is simply the area of the shell, or $4\pi R^2$. Therefore,
+    \[ Q_\text{enc} = 4\pi R^2 E\epsilon_0 \]
+    or, applying $E = kR^3$,
+    \[ Q_\text{enc} = 4\pi k R^5 \epsilon_0 \]
+\end{example}
+\subsection*{The Divergence of E}
+We can also compute the divergence of $\mbf E$ without relying on the integral statement of Gauss' law. Note that
+\[ \mbf E(\mbf r) = \K \iiint\limits_\text{all space} \frac{\hsr}{\sr^2}\rho(\mbf r') \dd \tau' \]
+Then, 
+\begin{align*}
+    \div \mbf E &= \div \pqty{ \K \iiint\limits_\text{all space} \frac{\hsr}{\sr^2}\rho(\mbf r') \dd \tau'} \\
+    &= \K \div \pqty{\iiint\limits_\text{all space} \frac{\hsr}{\sr^2}\rho(\mbf r') \dd \tau'}
+\end{align*}
+Interchanging the divergence operator and the integral is somewhat of an unjustified move, but it is indeed valid. Then,
+\begin{align*}
+    \div \mbf E  &= \K \iiint\limits_\text{all space}\div \pqty{\frac{\hsr}{\sr^2}}\rho(\mbf r') \dd \tau'
+\end{align*}
+If one were to calculate the divergence of this function directly, you would obtain that it is zero everywhere. But that isn't the full picture--the discontinuity at $\bsr = \mbf 0$ causes the divergence to not be valid there. I now will make a claim that an interested reader should independently verify. I claim that
+\[ \div \pqty{\frac{\hsr}{\sr^2}} = 4\pi \delta^3(\bsr) \]
+Where $\delta^3(\bsr)$ is the three-dimensional dirac delta distribution. This then yields
+\[ \div \mbf E = \K 4\pi \rho(\mbf r) = \frac{\rho(\mbf r)}{\epsilon_0}\]
+Which is just Gauss' law in differential form. Then, an application of the divergence theorem allows us to transform this into the integral form. And thus we have proven Gauss' law. 
+\subsection*{Applications of Gauss' Law}
+While Gauss' law is always true, it is not always \textit{useful}. We will explore which scenarios Gauss' law proves helpful in.
+\begin{example}
+    Find the electric field outside a uniformly charged sphere of radius $R$ and total charge $q$.
+
+    \textit{Solution.} Imagine some imaginary spherical \textit{Gaussian surface} $\mathcal S$ with a radius $r > R$. The may apply Gauss' law over this sphere to find
+    \[ \oiint_\mathcal{S} \mbf E \cdot \dd \mbf a = \frac{q}{\epsilon_0}\]
+    Here comes the useful trick; notice that $\mbf E$ points radially and so does $\dd \mbf a$. Thus, we can drop the dot product and find
+    \[ \oiint_\mathcal{S} E\dd a = \frac{q}{\epsilon_0} \]
+    the magnitude of $E$ is also constant over the surface, so we can pull it out of the integral, and find
+    \[ E\oiint \dd a = \frac{q}{\epsilon_0} \]
+    which finally gives $E = \K \frac{q}{r^2}$, or
+    \[ \mbf E = \K\frac{q}{r^2}\rhat \]
+    Notice that this result relied heavily on the rotational invariance of the field. This turns out to be a common pattern: Gauss' law is most useful in situations where the scenario has some level of symmetry that enables us to drop the complexity of the dot product and integral.
+\end{example}
+The forms of symmetry that let Gauss' law be useful are as follows:
+\begin{enumerate}
+    \item \textit{Spherical symmetry}: make the Gaussian surface a concentric sphere.
+    \item \textit{Cylindrical symmetry}: make the Gaussian surface a coaxial cylinder.
+    \item \textit{Plane symmetry}: make the Gaussian surface a ``pillbox" covering the surface.
+\end{enumerate}
+\begin{example}
+    A long cylinder carries a charge proportional to the distance from its center $\rho = kr$, where $k$ is a constant with appropriate units. Find the electric field inside this cylinder.
+
+    Draw a Gaussian cylinder of length $\ell$ and radius $r$. Then, the enclosed charge is 
+    \begin{align*}
+        Q_\text{enc} = \iiint \rho \dd \tau &= \iiint (kr')(r'\dd z\dd r'\dd \phi) \\
+        &= k\int_0^{2\pi}\dd \phi \int_0^r (r')^2\dd r' \int_0^\ell \dd z \\
+        &= \frac{2}{3}\pi k\ell r^3
+    \end{align*}
+    The surface of the Gaussian cylinder is split into three subdivisions--the two circular caps and the cylindrical part wrapping around. 
+
+    The field is perpendicular to the caps, so they contribute nothing to the flux; thus, we only consider the flux through the cylindrical part. The field is constant in magnitude along the surface and it points parallel to the area vector, so
+    \[ \oiint \mbf E \cdot \dd \mbf a = \oiint E\dd a = E\oiint \dd A = 2\pi r \ell E\]
+    Then, Gauss' law tells us
+    \[ 2\pi r \ell E = \frac{2}{3\epsilon_0}\pi k \ell r^3\]
+    So we find
+    \[ \mbf E = \frac{1}{3\epsilon_0}kr^2\rhat \]
+\end{example}
+\subsection*{The Curl of E}
+Consider a single point charge at the origin. It gives a field
+\[ \mbf E = \K \frac{q}{r^2} \rhat \]
+To find the curl of $\mbf E$, we will first turn our attention to the value of line integrals of $\mbf E$. For any two points $\mbf a, \mbf b$, we wish to find
+\[ \int_\mbf{a}^\mbf{b} \mbf E \cdot \dd \mbf l\]
+In spherical coordinates, we have $\dd\mbf l = \dd r \rhat + r\dd\theta\bsm{\hat\theta} + r\sin\theta \dd\phi\bsm{\hat\phi}$. Therefore
+\[ \mbf E \cdot \dd \mbf l = \K\frac{q}{r^2}\dd r\]
+which allows us to plug into the line integral to obtain
+\begin{align*}
+    \int_\mbf{a}^\mbf{b} \mbf E \cdot \dd \mbf l &= \K \int_{r_a}^{r_b} \frac{q}{r^2}\dd r \\
+    &= \K \pqty{\frac{q}{r_a}-\frac{q}{r_b}}
+\end{align*}
+Notice that whenever $\mbf a = \mbf b$, the line integral is zero, regardless of the part that was taken between $\mbf a$ and $\mbf b$. In math language, $\mbf E$ is \textbf{conservative}, meaning 
+\begin{equation}
+    \curl\mbf E = \mbf 0
+\end{equation}
+The principle of superposition allows this analysis to extend to any arbitrary distribution of charges, so in general we have $\curl\mbf E = \mbf 0$.
+\section{Electric Potential}
+\subsection*{Introduction to Potential}
+The fact that the curl of the electric field of zero means that it is a very special type of function, and this guarantees the existence of some \textbf{potential function} $V$ from which $\mbf E$ can be derived. Since $\mbf E$ is conservative, define the function
+\[ V(\mbf r) \equiv -\int_{\mathcal O}^\mbf{r} \mbf E \cdot \dd \mbf l\]
+where $\mathcal O$ is some freely chosen origin. The \textbf{potential difference} between two points $\mbf a$ and $\mbf b$ is then
+\begin{align*}
+    V(\mbf b) - V(\mbf a) &= -\int_{\mathcal{O}}^\mbf{b} \mbf E \cdot \dd \mbf l + \int_\mathcal{O}^{\mbf a}\mbf E \cdot \dd \mbf l \\
+    &= -\int_\mathcal{O}^\mbf{b} \mbf E \cdot \dd \mbf l - \int_\mbf{a}^{\mathcal O} \mbf E \cdot \dd \mbf l = -\int_\mbf{a}^\mbf{b} \mbf E \cdot \dd \mbf l
+\end{align*}
+The fundamental theorem for line integrals states that
+\[ V(\b b) - V(\b a) = \int_{\b a}^{\b b} (\grad V)\cdot \dd \b l\]
+Since this holds for \textit{any} $\b a, \b b$, we must then have
+\[ \boxed{\b E = -\grad V} \]
+\subsection*{Some Facts about Potential}
+\begin{enumerate}
+    \item[(i)] The reference point $\mcl O$ of the potential is actually irrelevant; if we had some reference points $\mcl O$ and $\mcl O'$, then the potential $V$ of a point $\b r$ with respect to $\mcl O$ is given by
+    \[ V(\b r) = -\int_{\mcl O}^{\b r} \b E \cdot \dd \b l\]
+    and the potential with respect to $\mcl O'$ is 
+    \[ V'(\b r) = -\int_{\mcl O'}^{\b r} \b E \cdot \dd \b l = -\int_{\mcl O'}^{\mcl O} \b E \cdot \dd \b l - \int_{\mcl O}^{\b r}\b E \cdot \dd \b l = K - V(\b r)\]
+    where $K$ is a constant defined with $K\equiv -\int_{\mcl O'}^{\mcl O} \b E \cdot \dd \b l$. Since adding any constant to the potential doesn't change the potential difference between any two points, since the $K$s cancel. Similarly, it doesn't affect the gradient, since $\grad(K)=\b 0$). 
+
+    So there is no physical difference between potential when it is defined relative to two separate reference points.
+
+    Since the reference point doesn't matter, we are free to pick any point we wish. The most ``natural" reference point is a point infinitely far from the charge. 
+    \item[(ii)] Suppose we superimpose several electric fields $\b E_1, \cdots, \b E_n$. Then,
+    \begin{align*}
+        V(\b r) &= -\int_{\mcl O}^{\b r} \pqty{\sum_{i=1}^n \b E_i}\cdot \dd \b l = \sum_{i=1}^n \pqty{-\int_{\mcl O}^{\b r} \b E_i\cdot \dd \b l}  = \sum_{i=1}^n V_i(\b r) 
+    \end{align*}
+    where $V_i(\b r)$ is the potential from the field $\b E_i$ alone. That is,
+    \[ \boxed{\text{Potential obeys superposition.}} \]
+\end{enumerate}
+\subsection*{Poisson's Equation and Laplace's Equation}
+We previously found that we can write $\b E$ as the gradient of a scalar potential:
+\[ \b E = -\grad V\]
+the following question naturally arises: what do Maxwell's electrostatic equations
+\[ \div\b E = \frac{\rho}{\epsilon_0} \quad\text{and}\quad \curl \b E = \b 0\]
+tell us about $V$? Since $\div \b E = \div (-\grad V) = -\grad^2V$, we have
+\[ -\grad^2 V = \frac{\rho}{\epsilon_0} \]
+in the presence of no charge, $\rho=0$ so this reduces to \textbf{Laplace's equation}
+\[ \boxed{\grad^2V = 0}\]
+We also have $\curl E = \curl(-\grad V) = \b 0$, but this is not a very useful relationship, as the curl of the gradient of any function is zero.
+\subsection*{The Potential of a Localized Charge Distribution}
+We defined $V$ in terms of $\b E$. However, we're typically more interested in finding $\b E$ than $V$. We seek for a way to determine $V$ without already knowing $\b E$ (then, we can use $V$ to find $\b E$ with $\b E = -\grad V$). Poisson's equation relates $V$ and $\rho$, but it is unfortunately ``the wrong way;" it gives us $\rho$ if we know $V$, but we want to determine $V$ from a given $\rho$.
+
+Let's begin with the simplest possible case; a single point charge $q$ at the origin. The field at a position $\b r$ is  
+\[ \b E(\b r) =\K\frac{q}{r^2}\rhat \]
+and a differential length is $\dd \b l = \dd r \rhat + r\sin\theta \dd \phi \phihat + r\dd \theta \thetahat$, so
+\[ \b E \cdot \dd \b l = \K \frac{q}{r^2} \dd r\]
+with the reference point at infinity, the potential is then
+\begin{align*}
+    V(\b r) &= -\int_{\mcl O}^{\b r} \b E \cdot \dd \b l = -\int_{\infty}^r \K\frac{q}{r'^2}\dd r' \\
+    &= \K\frac{q}{r'} \biggr|_{\infty}^r = \K\frac{q}{r}
+\end{align*}
+If our point charge was instead at a location $\b r'$, then in general
+\[ V(\b r) = \K \frac{q}{\sr}\]
+then, invoking superposition gives the potential for a collection of source charges:
+\[ V(\b r) = \sum_{i=1}^n V_i = \K\sum_{i=1}^n \frac{q_i}{\sr_i}\]
+and for a continuous distribution,
+\[ V(\b r) = \K\int \frac{1}{\sr_i}\dd q\]
+which gives us the following relations for a line, surface, or volume charge:
+\begin{alignat*}{2}
+    V(\b r) &= \K\int \frac{\lambda(\b r')}{\sr}\dd l' \quad\qquad&\text{(Line)}\\
+    V(\b r) &= \K\int \frac{\sigma(\b r')}{\sr}\dd a' &\text{(Surface)}\\
+    V(\b r) &= \K\int \frac{\rho(\b r')}{\sr}\dd \tau' &\text{(Volume)}
+\end{alignat*}
+\subsection*{Boundary Conditions}
+When passing over a surface charge $\sigma$, there is a discontinuity in $\b E$. In fact, it is relatively simple to see how large this discontinuity is.
+
+Suppose we draw a very thin, very small Gaussian pillbox with a lid area $A$, extending just barely over the edge of the surface charge. To a very good approximation, the surface is flat across this pillbox and has an enclosed charge $\sigma A$. Then, Gauss' law tells us
+\[ \oint \b E \cdot\dd \b a = \frac{Q_\text{enc}}{\epsilon_0} = \frac{\sigma \dd A}{\epsilon_0} \]
+In the limit as the side of the pillbox goes to zero, the sides do not contribute to the flux. So Gauss' law becomes
+\[  E_\text{above}^\perp - E_\text{below}^\perp = \frac{\sigma}{\epsilon_0}\]
+where the $\dd A$s cancel. This gives the following result:
+\[ \boxed{\text{The normal component of $\b E$ is discontinuous by an amount $\sigma/\epsilon_0$ at any boundary.}} \]
+Now, suppose we draw a very thin, flat rectangle wrapping around the area. Since $\b E$ is conservative, the line integral around the boundary of this rectangle is zero:
+\[ \oint  \b E \cdot \dd \b l = 0\]
+in the limit as the perpendicular component goes to zero, it contributes nothing to the line integral, so
+\[ E_\text{above}^\parallel - E_\text{below}^\parallel = 0\]
+so $E_\text{above}^\parallel = E_\text{below}^\parallel$, and the parallel component of the $\b E$ field is always continuous. 
+
+Putting these equations together gives the vector relationship
+\[ \b E_\text{above}- \b E_\text{below} = \frac{\sigma}{\epsilon_0}\b{\hat n} \]
+where $\b{\hat n}$ is a vector pointing normal to the surface (from ``below" to ``above").
+
+The potential is continuous across any boundary, since for any point $\b a$ below the surface and $\b b$ above the surface,
+\[ V(\b b) - V(\b a) = \int_{\b a}^{\b b} \b E \cdot \dd \b l\]
+in the limit as these two points get arbitrarily close together, the line integral goes to zero, so
+\[ V_\text{above} = V_\text{below} \]
+But the gradient of $V$ inherits the discontinuity in $\b E$, since $\b E = -\grad V$. Therefore
+\[ \grad V_\text{above} - \grad V_\text{below} = -\frac{\sigma}{\epsilon_0}\b{\hat n}\]
+we may also write this equation as
+\[ \pdv{V_\text{above}}{n} - \pdv{V_\text{below}}{n} = -\frac{\sigma}{\epsilon_0} \]
+where $\partial V/\partial n \equiv \grad V \cdot \b{\hat n}$ denotes the \textbf{normal derivative} of $V$ (the directional derivative of $V$ in the $\b{\hat n}$ direction).
+\section{Electrostatic Work and Energy}
